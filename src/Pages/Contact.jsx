@@ -74,9 +74,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
-    // You can integrate with a service like EmailJS or your backend
     alert("Thank you for your message! I'll get back to you soon.");
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
@@ -319,41 +317,6 @@ const Contact = () => {
               </Card>
             </motion.div>
           </div>
-
-          {/* Social Links Footer */}
-          {/* <motion.div variants={itemVariants} className="mt-16 text-center">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-semibold mb-4 text-foreground">
-                  Let's Connect on Social Media
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Follow me for updates on my latest projects and tech insights.
-                </p>
-                <div className="flex justify-center gap-4">
-                  {[
-                    { name: "GitHub", href: "https://github.com", icon: "💻" },
-                    { name: "LinkedIn", href: "https://linkedin.com", icon: "💼" },
-                    { name: "Twitter", href: "https://twitter.com", icon: "🐦" },
-                    { name: "Facebook", href: "https://facebook.com", icon: "👥" }
-                  ].map((social, index) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="p-3 bg-background border border-border rounded-lg hover:border-primary/50 transition-all duration-300 text-lg"
-                      title={social.name}
-                    >
-                      {social.icon}
-                    </motion.a>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div> */}
         </motion.div>
       </div>
     </section>

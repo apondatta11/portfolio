@@ -6,11 +6,11 @@ import { Github, Linkedin, Mail, Download, ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const handleResumeDownload = () => {
-    alert('Resume will be available soon!');
+    window.open("https://drive.google.com/file/d/1yB6GpMKIL4X_Xa7VWLf00M3wD-AhY_LK/view?usp=drive_link", "_blank");
   };
 
   const scrollToProjects = () => {
-    const element = document.querySelector('#projects');
+    const element = document.querySelector("#projects");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -22,9 +22,9 @@ const Hero = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -34,13 +34,16 @@ const Hero = () => {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
       <div className="container mx-auto px-6">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
@@ -51,58 +54,56 @@ const Hero = () => {
           {/* Text Content */}
           <motion.div className="space-y-8" variants={itemVariants}>
             <motion.div className="space-y-4" variants={itemVariants}>
-              <motion.p 
+              <motion.p
                 className="text-lg text-primary font-medium"
                 variants={itemVariants}
               >
-                👋 Hello, I'm Apon Datta
+                Hello, I'm
               </motion.p>
-              
-              <motion.h1 
+
+              <motion.h1
                 className="text-5xl md:text-7xl font-bold tracking-tight"
                 variants={itemVariants}
               >
-                <span 
-                  className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
-                  style={{ 
-                    backgroundImage: 'linear-gradient(to right, hsl(var(--primary)), hsl(var(--primary)) / 0.7)'
-                  }}
-                >
-                  Your Name
+                <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  Apon Datta
                 </span>
               </motion.h1>
-              
-              <motion.h2 
+
+              <motion.h2
                 className="text-2xl md:text-4xl font-semibold text-muted-foreground"
                 variants={itemVariants}
               >
                 Full Stack Developer
               </motion.h2>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-lg text-muted-foreground max-w-2xl leading-relaxed"
                 variants={itemVariants}
               >
-                I craft digital experiences that blend beautiful design with 
-                cutting-edge technology. Passionate about creating solutions 
+                I craft digital experiences that blend beautiful design with
+                cutting-edge technology. Passionate about creating solutions
                 that make a difference.
               </motion.p>
             </motion.div>
 
             {/* CTA Buttons */}
-            <motion.div className="flex flex-wrap gap-4" variants={itemVariants}>
-              <Button 
-                size="lg" 
-                onClick={handleResumeDownload} 
+            <motion.div
+              className="flex flex-wrap gap-4"
+              variants={itemVariants}
+            >
+              <Button
+                size="lg"
+                onClick={handleResumeDownload}
                 className="gap-2 group bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <Download className="h-4 w-4 group-hover:animate-bounce" />
-                Download Resume
+                View Resume
               </Button>
-              
-              <Button 
-                variant="outline" 
-                size="lg" 
+
+              <Button
+                variant="outline"
+                size="lg"
                 onClick={scrollToProjects}
                 className="gap-2 group border-border hover:bg-accent hover:text-accent-foreground"
               >
@@ -114,22 +115,38 @@ const Hero = () => {
             {/* Social Links */}
             <motion.div className="flex space-x-4 pt-4" variants={itemVariants}>
               {[
-                { icon: Github, href: "https://github.com", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: Mail, href: "mailto:your.email@example.com", label: "Email" }
+                {
+                  icon: Github,
+                  href: "https://github.com/apondatta11",
+                  label: "GitHub",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/apon-datta-b59630302/",
+                  label: "LinkedIn",
+                },
+                {
+                  icon: Mail,
+                  href: "mailto:apondatta2003@gmail.com",
+                  label: "Email",
+                },
               ].map((social, index) => (
                 <motion.div
                   key={social.label}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     asChild
                     className="rounded-full h-12 w-12 border border-border hover:bg-accent hover:text-accent-foreground"
                   >
-                    <a href={social.href} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <social.icon className="h-5 w-5" />
                     </a>
                   </Button>
@@ -139,7 +156,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Avatar/Image Section */}
-          <motion.div 
+          <motion.div
             className="flex justify-center lg:justify-end"
             variants={itemVariants}
           >
@@ -149,29 +166,31 @@ const Hero = () => {
               className="relative"
             >
               {/* Glowing Effect using your primary color */}
-              <div 
+              <div
                 className="absolute inset-0 rounded-full blur-xl animate-pulse"
-                style={{ backgroundColor: 'hsl(var(--primary) / 0.2)' }}
+                style={{ backgroundColor: "hsl(var(--primary) / 0.2)" }}
               ></div>
-              
-              <Avatar className="h-80 w-80 border-4 relative z-10" 
-                style={{ borderColor: 'hsl(var(--primary) / 0.2)' }}
+
+              <Avatar
+                className="h-80 w-80 border-4 relative z-10"
+                style={{ borderColor: "hsl(var(--primary) / 0.2)" }}
               >
-                <AvatarImage 
-                  src="https://lh3.googleusercontent.com/a/ACg8ocIp0YolFL72q5iPJEggJYOpt0HoTTDQFjoSTaOG4soI30dMfMAGsA=s576-c-no" 
-                  alt="Your Name" 
+                <AvatarImage
+                  src="https://lh3.googleusercontent.com/a/ACg8ocIp0YolFL72q5iPJEggJYOpt0HoTTDQFjoSTaOG4soI30dMfMAGsA=s576-c-no"
+                  alt="Apon Datta"
                   className="object-cover"
                 />
-                <AvatarFallback 
+                <AvatarFallback
                   className="text-6xl text-primary-foreground"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6))'
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.6))",
                   }}
                 >
-                  YN
+                  AD
                 </AvatarFallback>
               </Avatar>
-              
+
               {/* Floating Elements using your color system */}
               <motion.div
                 animate={{
@@ -180,14 +199,17 @@ const Hero = () => {
                 transition={{
                   duration: 3,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut",
                 }}
-                className="absolute -top-4 -right-4 px-3 py-1 rounded-full text-sm font-medium shadow-lg text-primary-foreground"
-                style={{ backgroundColor: 'hsl(var(--primary))' }}
+                className="absolute -top-4 -right-4 px-3 py-1 rounded-full text-sm font-medium shadow-lg z-20"
+                style={{
+                  backgroundColor: "hsl(var(--primary))",
+                  color: "hsl(var(--primary-foreground))",
+                }}
               >
                 💻 Coding
               </motion.div>
-              
+
               <motion.div
                 animate={{
                   y: [0, 10, 0],
@@ -196,10 +218,10 @@ const Hero = () => {
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: 1
+                  delay: 1,
                 }}
                 className="absolute -bottom-4 -left-4 px-3 py-1 rounded-full text-sm font-medium shadow-lg text-secondary-foreground"
-                style={{ backgroundColor: 'hsl(var(--secondary))' }}
+                style={{ backgroundColor: "hsl(var(--secondary))" }}
               >
                 🚀 Innovating
               </motion.div>
@@ -216,18 +238,20 @@ const Hero = () => {
           transition={{
             duration: 2,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           <div className="flex flex-col items-center space-y-2">
-            <span className="text-sm text-muted-foreground">Scroll to explore</span>
-            <div 
+            <span className="text-sm text-muted-foreground">
+              Scroll to explore
+            </span>
+            <div
               className="w-6 h-10 rounded-full flex justify-center border-2"
-              style={{ borderColor: 'hsl(var(--border))' }}
+              style={{ borderColor: "hsl(var(--border))" }}
             >
-              <div 
+              <div
                 className="w-1 h-3 rounded-full mt-2"
-                style={{ backgroundColor: 'hsl(var(--primary))' }}
+                style={{ backgroundColor: "hsl(var(--primary))" }}
               ></div>
             </div>
           </div>

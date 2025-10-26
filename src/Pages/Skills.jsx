@@ -1,58 +1,94 @@
-import React, { forwardRef, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "../components/ui/card";
-import { Code2, Server, Settings } from "lucide-react";
+import { Code2, Server, Palette, Database, Cpu, Cloud, GitBranch, Smartphone } from "lucide-react";
+import { Marquee } from "../components/ui/marquee";
+import { cn } from "@/lib/utils";
 
-// Custom Circle component for skills
-const Circle = forwardRef(({ className, children, skillName, percentage }, ref) => {
-  return (
-    <div ref={ref} className="relative group">
-      <div
-        className={cn(
-          "border-2 bg-card text-card-foreground z-10 flex size-16 items-center justify-center rounded-full border-primary/30 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:border-primary group-hover:shadow-xl",
-          className
-        )}
-      >
-        {children}
-      </div>
-      {/* Skill tooltip */}
-      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-20">
-        {skillName}
-        {percentage && (
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-foreground rotate-45"></div>
-        )}
-      </div>
-    </div>
-  );
-});
-
-Circle.displayName = "Circle";
-
-// Utility function (make sure this exists in your lib/utils.js)
-const cn = (...classes) => classes.filter(Boolean).join(' ');
+// React Icons imports
+import { 
+  SiJavascript, 
+  SiTypescript, 
+  SiReact, 
+  SiTailwindcss, 
+  SiHtml5, 
+  SiCss3,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiFirebase,
+  SiGit,
+  SiGithub,
+  SiPostman,
+  SiFigma,
+  SiNetlify,
+  SiVercel
+} from "react-icons/si";
+import { DiVisualstudio } from "react-icons/di";
 
 const Skills = () => {
-  const containerRef = useRef(null);
-  
-  // Frontend skills with icons and proficiency
-  const frontendSkills = [
-    { name: "HTML5", icon: "🔷", level: 95 },
-    { name: "CSS", icon: "🎨", level: 90 },
-    { name: "JavaScript", icon: "⚡", level: 88 },
-    { name: "React", icon: "⚛️", level: 85 },
-    { name: "Tailwind CSS", icon: "💨", level: 92 },
-    { name: "ShadCN UI", icon: "🎯", level: 80 },
-    { name: "Aceternity UI", icon: "✨", level: 78 },
-    { name: "DaisyUI", icon: "🌼", level: 75 },
-    { name: "React Bits", icon: "🧩", level: 70 }
+  // Skill categories with React Icons
+  const skillCategories = [
+    {
+      category: "Frontend Development",
+      icon: <Palette className="h-6 w-6" />,
+      skills: [
+        { name: "React", level: "Advanced", icon: <SiReact className="w-6 h-6 text-cyan-400" /> },
+        { name: "JavaScript", level: "Advanced", icon: <SiJavascript className="w-6 h-6 text-yellow-400" /> },
+        { name: "TypeScript", level: "Intermediate", icon: <SiTypescript className="w-6 h-6 text-blue-500" /> },
+        { name: "Tailwind CSS", level: "Advanced", icon: <SiTailwindcss className="w-6 h-6 text-cyan-500" /> },
+        { name: "HTML5", level: "Advanced", icon: <SiHtml5 className="w-6 h-6 text-orange-500" /> },
+        { name: "CSS3", level: "Advanced", icon: <SiCss3 className="w-6 h-6 text-blue-500" /> },
+      ],
+      gradient: "from-blue-500 to-cyan-500"
+    },
+    {
+      category: "Backend & Databases",
+      icon: <Server className="h-6 w-6" />,
+      skills: [
+        { name: "Node.js", level: "Intermediate", icon: <SiNodedotjs className="w-6 h-6 text-green-500" /> },
+        { name: "Express", level: "Intermediate", icon: <SiExpress className="w-6 h-6 text-gray-400" /> },
+        { name: "MongoDB", level: "Intermediate", icon: <SiMongodb className="w-6 h-6 text-green-500" /> },
+        { name: "REST APIs", level: "Intermediate", icon: <span className="text-xl">🔗</span> },
+        { name: "Firebase", level: "Intermediate", icon: <SiFirebase className="w-6 h-6 text-yellow-500" /> },
+      ],
+      gradient: "from-green-500 to-emerald-500"
+    },
+    {
+      category: "Tools & Platforms",
+      icon: <Cpu className="h-6 w-6" />,
+      skills: [
+        { name: "Git", level: "Advanced", icon: <SiGit className="w-6 h-6 text-orange-500" /> },
+        { name: "GitHub", level: "Advanced", icon: <SiGithub className="w-6 h-6 text-gray-400" /> },
+        { name: "VS Code", level: "Advanced", icon: <DiVisualstudio className="w-6 h-6 text-blue-500" /> },
+        { name: "Postman", level: "Intermediate", icon: <SiPostman className="w-6 h-6 text-orange-500" /> },
+        { name: "Figma", level: "Basic", icon: <SiFigma className="w-6 h-6 text-purple-500" /> },
+        { name: "Netlify", level: "Intermediate", icon: <SiNetlify className="w-6 h-6 text-cyan-400" /> },
+      ],
+      gradient: "from-purple-500 to-pink-500"
+    }
   ];
 
-  // Backend skills
-  const backendSkills = [
-    { name: "Node.js", icon: "🟢", level: 82 },
-    { name: "Express", icon: "🚀", level: 80 },
-    { name: "Firebase", icon: "🔥", level: 75 },
-    { name: "MongoDB", icon: "🍃", level: 78 }
+  // All skills for marquee animation with React Icons
+  const allSkills = [
+    { name: "React", icon: <SiReact className="w-10 h-10 text-cyan-400" /> },
+    { name: "JavaScript", icon: <SiJavascript className="w-10 h-10 text-yellow-400" /> },
+    { name: "TypeScript", icon: <SiTypescript className="w-10 h-10 text-blue-500" /> },
+    { name: "Tailwind CSS", icon: <SiTailwindcss className="w-10 h-10 text-cyan-500" /> },
+    { name: "HTML5", icon: <SiHtml5 className="w-10 h-10 text-orange-500" /> },
+    { name: "CSS3", icon: <SiCss3 className="w-10 h-10 text-blue-500" /> },
+    { name: "Node.js", icon: <SiNodedotjs className="w-10 h-10 text-green-500" /> },
+    { name: "Express", icon: <SiExpress className="w-10 h-10 text-gray-400" /> },
+    { name: "MongoDB", icon: <SiMongodb className="w-10 h-10 text-green-500" /> },
+    { name: "Firebase", icon: <SiFirebase className="w-10 h-10 text-yellow-500" /> },
+    { name: "Git", icon: <SiGit className="w-10 h-10 text-orange-500" /> },
+    { name: "GitHub", icon: <SiGithub className="w-10 h-10 text-gray-400" /> },
+    { name: "VS Code", icon: <DiVisualstudio className="w-10 h-10 text-blue-500" /> },
+    { name: "Postman", icon: <SiPostman className="w-10 h-10 text-orange-500" /> },
+    { name: "Figma", icon: <SiFigma className="w-10 h-10 text-purple-500" /> },
+    { name: "Netlify", icon: <SiNetlify className="w-10 h-10 text-cyan-400" /> },
+    { name: "Vercel", icon: <SiVercel className="w-10 h-10 text-gray-400" /> },
+    { name: "REST API", icon: <span className="text-2xl">🔗</span> },
   ];
 
   const containerVariants = {
@@ -77,6 +113,26 @@ const Skills = () => {
     }
   };
 
+  // Skill level badges
+  const LevelBadge = ({ level }) => {
+    const levelConfig = {
+      Advanced: { color: "bg-green-500/20 text-green-400 border-green-500/30", label: "Advanced" },
+      Intermediate: { color: "bg-blue-500/20 text-blue-400 border-blue-500/30", label: "Intermediate" },
+      Basic: { color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30", label: "Basic" }
+    };
+
+    const config = levelConfig[level] || levelConfig.Basic;
+
+    return (
+      <span className={cn(
+        "px-2 py-1 text-xs rounded-full border font-medium",
+        config.color
+      )}>
+        {config.label}
+      </span>
+    );
+  };
+
   return (
     <section id="skills" className="py-20 relative">
       <div className="container mx-auto px-6">
@@ -85,7 +141,7 @@ const Skills = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="max-w-6xl mx-auto"
+          className="max-w-7xl mx-auto"
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
@@ -99,146 +155,116 @@ const Skills = () => {
           </motion.div>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Frontend Skills */}
-            <motion.div variants={itemVariants}>
-              <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Code2 className="h-6 w-6 text-primary" />
-                    <h3 className="text-2xl font-semibold text-foreground">Frontend Development</h3>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {frontendSkills.map((skill, index) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border/30 hover:border-primary/50 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{skill.icon}</span>
-                          <span className="font-medium text-foreground">{skill.name}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${skill.level}%` }}
-                              transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
-                              className="h-full bg-primary rounded-full"
-                            />
-                          </div>
-                          <span className="text-sm text-muted-foreground w-8">
-                            {skill.level}%
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Backend Skills */}
-            <motion.div variants={itemVariants}>
-              <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Server className="h-6 w-6 text-primary" />
-                    <h3 className="text-2xl font-semibold text-foreground">Backend & Database</h3>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    {backendSkills.map((skill, index) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border/30 hover:border-primary/50 transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{skill.icon}</span>
-                          <span className="font-medium text-foreground">{skill.name}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
-                            <motion.div
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${skill.level}%` }}
-                              transition={{ delay: index * 0.1 + 0.5, duration: 1 }}
-                              className="h-full bg-primary rounded-full"
-                            />
-                          </div>
-                          <span className="text-sm text-muted-foreground w-8">
-                            {skill.level}%
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Tools Section */}
-                  <div className="mt-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Settings className="h-5 w-5 text-primary" />
-                      <h4 className="text-xl font-semibold text-foreground">Development Tools</h4>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {skillCategories.map((category, index) => (
+              <motion.div
+                key={category.category}
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full group hover:border-primary/50 transition-all duration-300">
+                  <CardContent className="p-6">
+                    {/* Category Header */}
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className={cn(
+                        "p-3 rounded-xl bg-gradient-to-br",
+                        category.gradient,
+                        "text-white group-hover:scale-110 transition-transform duration-300"
+                      )}>
+                        {category.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">
+                        {category.category}
+                      </h3>
                     </div>
-                    
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        "Git & GitHub", "VS Code", "Postman", "Chrome DevTools", 
-                        "Figma", "Netlify", "Vercel", "NPM/Yarn"
-                      ].map((tool, index) => (
-                        <motion.span
-                          key={tool}
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.05 }}
-                          className="px-3 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-sm font-medium hover:bg-primary/30 transition-colors"
+
+                    {/* Skills List */}
+                    <div className="space-y-3">
+                      {category.skills.map((skill, skillIndex) => (
+                        <motion.div
+                          key={skill.name}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: skillIndex * 0.1 }}
+                          className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border/30 hover:border-primary/30 transition-colors group/item"
                         >
-                          {tool}
-                        </motion.span>
+                          <div className="flex items-center gap-3">
+                            <div className="flex items-center justify-center w-8 h-8">
+                              {skill.icon}
+                            </div>
+                            <span className="font-medium text-foreground">
+                              {skill.name}
+                            </span>
+                          </div>
+                          <LevelBadge level={skill.level} />
+                        </motion.div>
                       ))}
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Skills Visualization */}
-          <motion.div variants={itemVariants} className="mt-16">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+          {/* Animated Logo Marquee */}
+          <motion.div variants={itemVariants} className="mb-16">
+            <Card className="bg-card/50 backdrop-blur-sm border-border/50 overflow-hidden">
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
-                  Tech Stack Overview
+                  Technology Stack
                 </h3>
                 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {[
-                    { category: "Frontend", count: frontendSkills.length, color: "bg-blue-500" },
-                    { category: "Backend", count: backendSkills.length, color: "bg-green-500" },
-                    { category: "UI Libraries", count: 4, color: "bg-purple-500" },
-                    { category: "Tools", count: 8, color: "bg-orange-500" }
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.category}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="text-center p-4 rounded-lg bg-background/50 border border-border/30"
-                    >
-                      <div className={`w-12 h-12 ${item.color} rounded-full flex items-center justify-center mx-auto mb-3`}>
-                        <span className="text-white font-bold text-lg">{item.count}</span>
+                {/* Double Logo Marquee Effect */}
+                <div className="space-y-8">
+                  <Marquee
+                    pauseOnHover
+                    className="[--duration:30s]"
+                  >
+                    {allSkills.map((skill, index) => (
+                      <div
+                        key={`${skill.name}-1`}
+                        className={cn(
+                          "mx-4 p-4 rounded-2xl border bg-background/80",
+                          "border-border/50 hover:border-primary/50 hover:bg-primary/5",
+                          "transition-all duration-300 transform hover:scale-110 hover:shadow-lg",
+                          "flex flex-col items-center gap-2 w-24 h-24 justify-center group"
+                        )}
+                      >
+                        <div className="flex items-center justify-center w-12 h-12">
+                          {skill.icon}
+                        </div>
+                        <span className="text-xs font-medium text-foreground/80 group-hover:text-foreground transition-colors text-center">
+                          {skill.name}
+                        </span>
                       </div>
-                      <h4 className="font-semibold text-foreground">{item.category}</h4>
-                      <p className="text-sm text-muted-foreground">Technologies</p>
-                    </motion.div>
-                  ))}
+                    ))}
+                  </Marquee>
+                  
+                  <Marquee
+                    pauseOnHover
+                    reverse
+                    className="[--duration:25s]"
+                  >
+                    {allSkills.slice().reverse().map((skill, index) => (
+                      <div
+                        key={`${skill.name}-2`}
+                        className={cn(
+                          "mx-4 p-4 rounded-2xl border bg-background/80",
+                          "border-border/50 hover:border-primary/50 hover:bg-primary/5",
+                          "transition-all duration-300 transform hover:scale-110 hover:shadow-lg",
+                          "flex flex-col items-center gap-2 w-24 h-24 justify-center group"
+                        )}
+                      >
+                        <div className="flex items-center justify-center w-12 h-12">
+                          {skill.icon}
+                        </div>
+                        <span className="text-xs font-medium text-foreground/80 group-hover:text-foreground transition-colors text-center">
+                          {skill.name}
+                        </span>
+                      </div>
+                    ))}
+                  </Marquee>
                 </div>
               </CardContent>
             </Card>

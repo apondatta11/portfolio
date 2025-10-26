@@ -3,14 +3,13 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ExternalLink, Github, ArrowRight } from "lucide-react";
-// import { projectsData } from "../data/projectsData";
 import { useNavigate } from "react-router";
 
 const projectsData = [
   {
     id: 1,
     name: "Insura",
-    tagline: "Comprehensive Insurance Management Platform",
+    tagline: "Insurance Management Platform",
     description: "A full-stack insurance management system with role-based access, policy management, payment processing, and claim handling.",
     image: "https://i.ibb.co.com/8LKZXt7f/Screenshot-2025-10-17-at-6-34-40-PM.png",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Firebase", "Stripe", "Tailwind CSS"],
@@ -168,11 +167,11 @@ const Projects = () => {
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
-                className="group"
+                className="group flex flex-col"
               >
-                <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full overflow-hidden hover:border-primary/50 transition-all duration-300">
+                <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col">
                   {/* Project Image */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden flex-shrink-0">
                     <img
                       src={project.image}
                       alt={project.name}
@@ -189,9 +188,9 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 flex flex-col flex-grow">
                     {/* Project Info */}
-                    <div className="space-y-4">
+                    <div className="space-y-4 flex-grow">
                       <div>
                         <h3 className="text-xl font-bold text-foreground mb-2">
                           {project.name}
@@ -238,39 +237,39 @@ const Projects = () => {
                           )}
                         </ul>
                       </div>
+                    </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex flex-wrap gap-3 pt-4">
+                    {/* Action Buttons - Always at bottom */}
+                    <div className="flex flex-wrap gap-3 pt-6 mt-auto">
+                      <Button
+                        onClick={() => handleViewDetails(project.id)}
+                        className="flex-1 gap-2 group"
+                      >
+                        View Details
+                        <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                      
+                      <div className="flex gap-2">
                         <Button
-                          onClick={() => handleViewDetails(project.id)}
-                          className="flex-1 gap-2 group"
+                          variant="outline"
+                          size="icon"
+                          asChild
+                          className="border-border hover:bg-accent hover:text-accent-foreground"
                         >
-                          View Details
-                          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
                         </Button>
-                        
-                        <div className="flex gap-2">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            asChild
-                            className="border-border hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-4 w-4" />
-                            </a>
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            asChild
-                            className="border-border hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-4 w-4" />
-                            </a>
-                          </Button>
-                        </div>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          asChild
+                          className="border-border hover:bg-accent hover:text-accent-foreground"
+                        >
+                          <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                            <Github className="h-4 w-4" />
+                          </a>
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
@@ -278,36 +277,6 @@ const Projects = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Projects Summary */}
-          <motion.div variants={itemVariants} className="mt-16 text-center">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 max-w-2xl mx-auto">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold mb-4 text-foreground">
-                  Project Statistics
-                </h3>
-                <div className="grid grid-cols-3 gap-6 mb-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary mb-1">{projectsData.length}</div>
-                    <div className="text-sm text-muted-foreground">Projects</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary mb-1">
-                      {projectsData.filter(p => p.category === "Full Stack").length}
-                    </div>
-                    <div className="text-sm text-muted-foreground">Full Stack</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary mb-1">3+</div>
-                    <div className="text-sm text-muted-foreground">Tech Stacks</div>
-                  </div>
-                </div>
-                <p className="text-muted-foreground italic">
-                  "Each project represents a unique challenge and learning opportunity in my development journey."
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
         </motion.div>
       </div>
     </section>

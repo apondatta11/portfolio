@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { ArrowLeft, ExternalLink, Github, Code, Zap, Lightbulb } from "lucide-react";
-// import { projectsData } from "../data/projectsData";
 
 const projectsData = [
   {
@@ -12,7 +11,7 @@ const projectsData = [
     name: "Insura",
     tagline: "Comprehensive Insurance Management Platform",
     description: "A full-stack insurance management system with role-based access, policy management, payment processing, and claim handling.",
-    image: "/api/placeholder/600/400",
+    image: "https://i.ibb.co.com/8LKZXt7f/Screenshot-2025-10-17-at-6-34-40-PM.png",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Firebase", "Stripe", "Tailwind CSS"],
     liveLink: "https://assignment-12-client-d6f9a.web.app/",
     githubLink: "https://github.com/apondatta11/Insura",
@@ -46,7 +45,7 @@ const projectsData = [
     name: "TripBuzz",
     tagline: "Travel Package Booking Platform",
     description: "A marketplace for travel packages where merchants can list packages and customers can book their dream vacations.",
-    image: "/api/placeholder/600/400",
+    image: "https://i.ibb.co.com/YTNjRnfv/Screenshot-2025-10-17-at-6-33-23-PM.png",
     technologies: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
     liveLink: "https://cse-2100-project.web.app/",
     githubLink: "https://github.com/apondatta11/TripBuzz",
@@ -80,7 +79,7 @@ const projectsData = [
     name: "FindRoomy",
     tagline: "Roommate Finder Platform",
     description: "A platform to help people find compatible roommates and manage shared living arrangements.",
-    image: "/api/placeholder/600/400",
+    image: "https://i.ibb.co.com/bRbp4nB0/Screenshot-2025-10-17-at-6-29-38-PM.png",
     technologies: ["React", "JavaScript", "CSS", "Local Storage", "React Router"],
     liveLink: "https://assignment-10-c85ff.web.app/",
     githubLink: "https://github.com/apondatta11/FindRoomy",

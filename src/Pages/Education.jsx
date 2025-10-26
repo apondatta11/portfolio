@@ -173,7 +173,7 @@ const Education = () => {
 
                         {/* Achievements */}
                         <div className="space-y-2">
-                          <h4 className="font-semibold text-foreground text-sm">Key Highlights:</h4>
+                          <h4 className="font-semibold text-foreground text-sm flex justify-start">Key Highlights:</h4>
                           <ul className="space-y-1">
                             {edu.achievements.map((achievement, idx) => (
                               <motion.li
@@ -197,69 +197,7 @@ const Education = () => {
             ))}
           </div>
 
-          {/* Academic Summary */}
-          <motion.div variants={itemVariants} className="mt-16">
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
-                  Academic Excellence
-                </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {[
-                    {
-                      title: "Current CGPA",
-                      value: "3.62",
-                      subtitle: "RUET CSE",
-                      icon: "📊",
-                      color: "text-green-400"
-                    },
-                    {
-                      title: "HSC GPA",
-                      value: "5.00",
-                      subtitle: "Perfect Score",
-                      icon: "🏆",
-                      color: "text-yellow-400"
-                    },
-                    {
-                      title: "Years of Study",
-                      value: "2+",
-                      subtitle: "Engineering",
-                      icon: "🎓",
-                      color: "text-blue-400"
-                    }
-                  ].map((stat, index) => (
-                    <motion.div
-                      key={stat.title}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="text-center p-6 rounded-lg bg-background/50 border border-border/30 hover:border-primary/50 transition-all duration-300"
-                    >
-                      <div className="text-3xl mb-3">{stat.icon}</div>
-                      <div className={`text-3xl font-bold ${stat.color} mb-2`}>
-                        {stat.value}
-                      </div>
-                      <h4 className="font-semibold text-foreground mb-1">{stat.title}</h4>
-                      <p className="text-sm text-muted-foreground">{stat.subtitle}</p>
-                    </motion.div>
-                  ))}
-                </div>
 
-                {/* Additional Info */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="mt-8 text-center"
-                >
-                  <p className="text-muted-foreground italic">
-                    "Consistently maintaining academic excellence while actively participating in 
-                    programming communities and technical skill development."
-                  </p>
-                </motion.div>
-              </CardContent>
-            </Card>
-          </motion.div>
         </motion.div>
       </div>
     </section>
